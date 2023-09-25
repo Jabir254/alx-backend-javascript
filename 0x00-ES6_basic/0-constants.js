@@ -1,5 +1,7 @@
+// Using of const and let variables
+
 export function taskFirst() {
-	const task = "I prefer const when i can.";
+	const task = "I prefer const when I can.";
 	return task;
 }
 
