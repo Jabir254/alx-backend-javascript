@@ -1,25 +1,27 @@
 export interface Student {
-    firstName : string;
-    lastName: string;
-    age: number;
-    location: string;
+  firstName: string;
+  lastName: string;
+  age: number;
+  location: string;
 }
+const studentA: Student = {
+  firstName: "Harry",
+  lastName: "Yoon",
+  age: 22,
+  location: "Seoul, South Korea",
+};
+const studentB: Student = {
+  firstName: "Anjali",
+  lastName: "Prajapati",
+  age: 22,
+  location: "Lodz, Poland",
+};
 
-const student1: Student = {
-    firstName: "John",
-    lastName: "Doe",
-    age: 20,
-    location: "New York",
-  };
-  
-  const student2: Student = {
-    firstName: "Jane",
-    lastName: "Smith",
-    age: 22,
-    location: "Los Angeles",
-  };
-
-  const styleSheet = `
+const studentsList: Array<Student> = [
+  studentA,
+  studentB,
+];
+const styleSheet = `
   html {
     margin: 0;
     height: 100%;
@@ -51,31 +53,34 @@ const student1: Student = {
     text-align: center;
   }
 `;
-  
 
-const StudentsList: Student [] = [student1, student2];
+/**
+ * Displays information about students in a table.
+ * @param students The list of students to display.
+ */
+export const displayStudents = (students: Array<Student>): void => {
+  const table = document.createElement('table');
+  const tableHead = document.createElement('thead');
+  const headRow = document.createElement('tr');
+  const tableBody = document.createElement('tbody');
+  headRow.insertAdjacentHTML('beforeend', '<td>FirstName</td');
+  headRow.insertAdjacentHTML('beforeend', '<td>Location</td');
+  tableHead.insertAdjacentElement('beforeend', headRow);
 
-function renderTable() {
-    const table = document.createElement("table");
-  
-    // Create the table header
-    const headerRow = table.insertRow(0);
-    const headerCell1 = headerRow.insertCell(0);
-    const headerCell2 = headerRow.insertCell(1);
-    headerCell1.textContent = "First Name";
-    headerCell2.textContent = "Location";
-  
-    // Create a row for each student
-    StudentsList.forEach((student, index) => {
-      const row = table.insertRow(index + 1);
-      const cell1 = row.insertCell(0);
-      const cell2 = row.insertCell(1);
-      cell1.textContent = student.firstName;
-      cell2.textContent = student.location;
-    });
-  
-    document.body.appendChild(table);
+  for (const student of students) {
+    const bodyRow = document.createElement('tr');
+    bodyRow.insertAdjacentHTML('beforeend', `<td>${student.firstName}</td>`);
+    bodyRow.insertAdjacentHTML('beforeend', `<td>${student.location}</td>`);
+    tableBody.insertAdjacentElement('beforeend', bodyRow);
   }
-  
-  // Render the table when the document is ready
-  document.addEventListener("DOMContentLoaded", renderTable);
+
+  table.insertAdjacentElement('beforeend', tableHead);
+  table.insertAdjacentElement('beforeend', tableBody);
+  document.body.insertAdjacentElement('beforeend', table);
+};
+
+displayStudents(studentsList);
+const styleSheetElement = document.createElement('style');
+styleSheetElement.innerHTML = styleSheet;
+document.head.insertAdjacentElement('beforeend', styleSheetElement);
+document.title = 'Task 0';
