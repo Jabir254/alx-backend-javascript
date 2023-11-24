@@ -1,30 +1,36 @@
-const assert = require('assert');
+const expect = require('chai').expect;
 const {it, describe} = require('mocha');
-const calculateNumber = require('./1-calcul');
+const calculateNumber = require('./2-calcul');
 
-describe('calculateNumber()', function() {
-  it(`checking if numbers round and sum`, function() {
-    const res = calculateNumber('SUM', 1, 2);
-    assert.strictEqual(res, 3);
+describe('calculateNumber', function() {
+  describe('SUM', function() {
+    it('checking if numbers round', function() {
+      expect(calculateNumber('SUM', 1, 2)).to.equal(3);
+    });
+    it('checking if numbers round', function() {
+      expect(calculateNumber('SUM', 1.6, 2.6)).to.equal(5);
+    });
   });
-  it(`checking if numbers round and subtract`, function() {
-    const res = calculateNumber('SUBTRACT', 1.4, 2.2);
-    assert.strictEqual(res, -1);
+  describe('SUBTRACT', function() {
+    it('checking if numbers round', function() {
+      expect(calculateNumber('SUBTRACT', 1.4, 2.3)).to.equal(-1);
+    });
+    it('checking if numbers round', function() {
+      expect(calculateNumber('SUBTRACT', 4.9, 2.7)).to.equal(2);
+    });
+    it('checking if numbers round', function() {
+      expect(calculateNumber('SUBTRACT', -4.9, -2.7)).to.equal(-2);
+    });
   });
-  it(`checking if numbers round subtract`, function() {
-    const res = calculateNumber('SUBTRACT', 4.9, 2.7);
-    assert.strictEqual(res, 2);
-  });
-  it(`checking if numbers round divide`, function() {
-    const res = calculateNumber('DIVIDE', 4, 2);
-    assert.strictEqual(res, 2);
-  });
-  it(`checking if numbers round divide`, function() {
-    const res = calculateNumber('DIVIDE', 1.7, 0);
-    assert.strictEqual(res, 'Error');
-  });
-  it(`checking if numbers round divide`, function() {
-    const res = calculateNumber('DIVIDE', 1.4, 4.6);
-    assert.strictEqual(res, 0.2);
+  describe('DIVIDE', function() {
+    it('checking if numbers round', function() {
+      expect(calculateNumber('DIVIDE', 4, 2)).to.equal(2);
+    });
+    it('checking if numbers round', function() {
+      expect(calculateNumber('DIVIDE', 4.6, 1.8)).to.equal(2.5);
+    });
+    it('checking if numbers round', function() {
+      expect(calculateNumber('DIVIDE', 4, 0)).to.equal('Error');
+    });
   });
 });
